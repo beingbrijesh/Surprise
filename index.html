@@ -2,321 +2,405 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Surprise</title>
-    <style>
-        /* Full-screen responsive surprise layout */
-        .surprise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 999;
-            overflow-y: auto;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Surprise</title>
+  <style>
+    /* Full-screen responsive surprise layout */
+    .surprise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 999;
+      overflow-y: auto;
+    }
 
-        /* Half-page layout */
-        .surprise-container {
-            display: flex;
-            flex-direction: row;
-            width: 90%;
-            height: auto;
-            border-radius: 1rem;
-            overflow: hidden;
-            background-color: white;
-            max-height: 90vh;
-        }
+    /* Half-page layout */
+    .surprise-container {
+      display: flex;
+      flex-direction: row;
+      width: 90%;
+      height: auto;
+      border-radius: 1rem;
+      overflow: hidden;
+      background-color: white;
+      max-height: 90vh;
+    }
 
-        @media (max-width: 639px) {
-            .surprise-container {
-                flex-direction: column;
-                width: 95%;
-            }
-        }
+    @media (max-width: 639px) {
+      .surprise-container {
+        flex-direction: column;
+        width: 95%;
+      }
+    }
 
-        /* Half image styling */
-        .surprise-image {
-            width: 50%;
-            object-fit: cover;
-        }
+    /* Half image styling */
+    .surprise-image {
+      width: 50%;
+      object-fit: cover;
+    }
 
-        @media (max-width: 639px) {
-            .surprise-image {
-                width: 100%;
-                height: 50%;
-            }
-        }
+    @media (max-width: 639px) {
+      .surprise-image {
+        width: 100%;
+        height: 50%;
+      }
+    }
 
-        /* Text with flower background */
-        .surprise-text {
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            padding: 2rem;
-            background-image: url('images/text\ bg.jpg');
-            background-size: cover;
-            background-position: center;
-            overflow-y: auto;
-            max-height: 100%;
-        }
+    /* Text background */
+    .surprise-text {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      padding: 2rem;
+      background-image: url('images/text bg.jpg');
+      background-size: cover;
+      background-position: center;
+      overflow-y: auto;
+      max-height: 100%;
+    }
 
-        @media (max-width: 639px) {
-            .surprise-text {
-                width: 100%;
-                height: auto;
-                text-align: center;
-            }
-        }
+    @media (max-width: 639px) {
+      .surprise-text {
+        width: 100%;
+        height: auto;
+        text-align: center;
+      }
+    }
 
-        /* Celebration animation */
-        .celebration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
+    /* Celebration animation */
+    .celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
 
-        .flower {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background-image: url('images/rose.webp');
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.8;
-            animation: fall 8s linear infinite;
-        }
+    .flower {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-image: url('images/rose.webp');
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+      animation: fall 8s linear infinite;
+    }
 
-        @keyframes fall {
-            from {
-                transform: translateY(-120vh) rotate(0deg);
-            }
+    @keyframes fall {
+      from {
+        transform: translateY(-120vh) rotate(0deg);
+      }
 
-            to {
-                transform: translateY(120vh) rotate(360deg);
-            }
-        }
-    </style>
+      to {
+        transform: translateY(120vh) rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body class="min-h-screen bg-cover bg-center" style="background-image: url('images/background.jpg');">
 
-    <!-- Responsive Grid for Surprise Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto p-6">
-        <!-- Card 1 -->
-        <div class="w-full h-64 bg-blue-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
-            <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎁</h2>
-            <button class="mt-4 px-4 py-2 bg-white text-blue-600 font-bold rounded-lg surprise-btn" data-surprise="1">
-                Show Surprise
-            </button>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="w-full h-64 bg-red-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
-            <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
-            <button class="mt-4 px-4 py-2 bg-white text-red-600 font-bold rounded-lg surprise-btn" data-surprise="2">
-                Show Surprise
-            </button>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="w-full h-64 bg-blue-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
-            <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
-            <button class="mt-4 px-4 py-2 bg-white text-blue-600 font-bold rounded-lg surprise-btn" data-surprise="3">
-                Show Surprise
-            </button>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="w-full h-64 bg-red-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
-            <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
-            <button class="mt-4 px-4 py-2 bg-white text-red-600 font-bold rounded-lg surprise-btn" data-surprise="4">
-                Show Surprise
-            </button>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="w-full h-64 bg-blue-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
-            <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
-            <button class="mt-4 px-4 py-2 bg-white text-blue-600 font-bold rounded-lg surprise-btn" data-surprise="5">
-                Show Surprise
-            </button>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="w-full h-64 bg-red-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
-            <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
-            <button class="mt-4 px-4 py-2 bg-white text-red-600 font-bold rounded-lg surprise-btn" data-surprise="6">
-                Show Surprise
-            </button>
-        </div>
+  <!-- Responsive Grid for Surprise Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto p-6">
+    <!-- Added class "card" to each card container for JS to work correctly -->
+    <!-- Card 1 -->
+    <div class="card w-full h-64 bg-blue-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
+      <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎁</h2>
+      <button class="mt-4 px-4 py-2 bg-white text-blue-600 font-bold rounded-lg surprise-btn" data-surprise="1" data-unlock="2025-02-08T00:00:00">
+        Show Surprise
+      </button>
     </div>
 
-    <!-- Full-Screen Surprise Overlays -->
-    <div id="surprise-1" class="surprise-overlay">
-        <div class="surprise-container">
-            <img src="college.jpg" alt="Surprise Image 1" class="surprise-image">
-            <div class="surprise-text">
-                <h1 class="text-3xl sm:text-4xl font-bold">Happy Valentine! 💝</h1>
-                <p class="custom-font text-4xl">Wishing you a day full of love and happiness!</p>
-            </div>
-        </div>
-        <audio id="audio-1" src="Music/01.mp3" preload="auto"></audio>
+    <!-- Card 2 -->
+    <div class="card w-full h-64 bg-red-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
+      <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
+      <button class="mt-4 px-4 py-2 bg-white text-red-600 font-bold rounded-lg surprise-btn" data-surprise="2" data-unlock="2025-02-08T00:00:00">
+        Show Surprise
+      </button>
     </div>
 
-    <div id="surprise-2" class="surprise-overlay">
-        <div class="surprise-container">
-            <img src="college.jpg" alt="Surprise Image 2" class="surprise-image">
-            <div class="surprise-text">
-                <h1 class="text-3xl sm:text-4xl font-bold">You're Special! 🌹</h1>
-                <p class="custom-font text-4xl">Here's a beautiful surprise just for you!</p>
-            </div>
-        </div>
-        <audio id="audio-2" src="Music/02.mp3" preload="auto"></audio>
+    <!-- Card 3 -->
+    <div class="card w-full h-64 bg-blue-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
+      <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
+      <button class="mt-4 px-4 py-2 bg-white text-blue-600 font-bold rounded-lg surprise-btn" data-surprise="3" data-unlock="2025-02-09T00:00:00">
+        Show Surprise
+      </button>
     </div>
 
-    <div id="surprise-3" class="surprise-overlay">
-        <div class="surprise-container">
-            <img src="college.jpg" alt="Surprise Image 3" class="surprise-image">
-            <div class="surprise-text">
-                <h1 class="text-3xl sm:text-4xl font-bold">You're Special! 🌹</h1>
-                <p class="custom-font text-4xl">Here's a beautiful surprise just for you!</p>
-            </div>
-        </div>
-        <audio id="audio-3" src="Music/03.mp3" preload="auto"></audio>
+    <!-- Card 4 -->
+    <div class="card w-full h-64 bg-red-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
+      <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
+      <button class="mt-4 px-4 py-2 bg-white text-red-600 font-bold rounded-lg surprise-btn" data-surprise="4" data-unlock="2025-02-10T00:00:00">
+        Show Surprise
+      </button>
     </div>
 
-    <div id="surprise-4" class="surprise-overlay">
-        <div class="surprise-container">
-            <img src="college.jpg" alt="Surprise Image 4" class="surprise-image">
-            <div class="surprise-text">
-                <h1 class="text-3xl sm:text-4xl font-bold">You're Special! 🌹</h1>
-                <p class="custom-font text-4xl">Here's a beautiful surprise just for you!</p>
-            </div>
-        </div>
-        <audio id="audio-4" src="Music/04.mp3" preload="auto"></audio>
+    <!-- Card 5 -->
+    <div class="card w-full h-64 bg-blue-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
+      <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
+      <button class="mt-4 px-4 py-2 bg-white text-blue-600 font-bold rounded-lg surprise-btn" data-surprise="5" data-unlock="2025-02-11T00:00:00">
+        Show Surprise
+      </button>
     </div>
 
-    <div id="surprise-5" class="surprise-overlay">
-        <div class="surprise-container">
-            <img src="college.jpg" alt="Surprise Image 5" class="surprise-image">
-            <div class="surprise-text">
-                <h1 class="text-3xl sm:text-4xl font-bold">You're Special! 🌹</h1>
-                <p class="custom-font text-4xl">Here's a beautiful surprise just for you!</p>
-            </div>
-        </div>
-        <audio id="audio-5" src="Music/05.mp3" preload="auto"></audio>
+    <!-- Card 6 -->
+    <div class="card w-full h-64 bg-red-400 rounded-xl shadow-lg flex flex-col justify-center items-center">
+      <h2 class="text-lg sm:text-xl font-bold text-white">Tap Me 🎊</h2>
+      <button class="mt-4 px-4 py-2 bg-white text-red-600 font-bold rounded-lg surprise-btn" data-surprise="6" data-unlock="2025-02-12T00:00:00">
+        Show Surprise
+      </button>
     </div>
+  </div>
 
-    <div id="surprise-6" class="surprise-overlay">
-        <div class="surprise-container">
-            <img src="college.jpg" alt="Surprise Image 6" class="surprise-image">
-            <div class="surprise-text">
-                <h1 class="text-3xl sm:text-4xl font-bold">You're Special! 🌹</h1>
-                <p class="custom-font text-4xl">Here's a beautiful surprise just for you!</p>
-            </div>
-        </div>
-        <audio id="audio-6" src="Music/06.mp3" preload="auto"></audio>
+  <!-- Full-Screen Surprise Overlays -->
+  <div id="surprise-1" class="surprise-overlay">
+    <div class="surprise-container">
+      <img src="images/01.jpg" alt="Surprise Image 1" class="surprise-image">
+      <div class="surprise-text">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">Where We Started 💝</h1>
+        <p class="custom-font text-4xl"><h4>
+          First time formal meeting hui thi school me jb mai tumhare ghar shift krne wala tha. Tum mujhe nhi
+          jaanti thi but mai 6th se tumko jaanta tha. Tumhare according jo meri image thi wo thik to bilkul
+          bhi nhi thi kyuki itna sab kuch tumne 10th aur 11th me mere baare me sunn rakha tha. Baat krna bahut
+          muskil se start hua aur tumne khud pta krne ka socha ki sach kya hai aur jb Janvi ne baat krne se
+          mana kiya tb tumko thoda sa meri baato pe bharosa hona start hua. First time tum mere se chatt pe
+          baat ki jb mai problems me tha aur kuch isi tarah hamari dosti ki journey start hui.</h4>
+        </p>
+      </div>
     </div>
+    <audio id="audio-1" src="Music/01.mp3" preload="auto"></audio>
+  </div>
 
-    <script>
-        let openedCards = 0; // Track opened cards
-        let currentAudio = null; // Track the currently playing audio
+  <div id="surprise-2" class="surprise-overlay">
+    <div class="surprise-container">
+      <img src="images/02.jpg" alt="Surprise Image 2" class="surprise-image">
+      <div class="surprise-text">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">Alway be Happy like this 🌻</h1>
+        <p class="custom-font text-4xl"><h4>
+          Ham mile hee the ki phir alag hona pda. School khatam hone k baad tum Kota chali gyi NEET k liye aur
+          mai college le liya. Sabse toughest time tha ye tumhare liye but itne durr hone k baad bhi ham bahut
+          pass the aur dheere dheere aur pass aate chale gye. Itne saare ups downs ko survive krte hue tumne
+          ye phase bhi nikaal liya. Pahli baar tum thoda sa socially involve hui thi lekin phir usme bhi pta
+          chala ki log tumhare saamne kuch aur hai aur tumhare peeche kuch aur. Ghar ki daant sunte sunte aur
+          logo ka dohra chehra dekhte dekhte tumne NEET nikal k dikha diya. Itna sab kuch sahte sahte tumne
+          aakhir kr dikhaya. <b>Your are the Strong enough to do anything.</b> Tumhe logo ki jaroorat nhi hai
+          kuch krne k liye tum akeli kaafi ho ye baat tum hamesa yaad rakhna.</h4>
+        </p>
+      </div>
+    </div>
+    <audio id="audio-2" src="Music/02.mp3" preload="auto"></audio>
+  </div>
 
-        // Show full-screen surprise, play song, and trigger celebration
-        document.querySelectorAll('.surprise-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const surpriseId = button.getAttribute('data-surprise');
-                const card = button.closest('.card');
+  <div id="surprise-3" class="surprise-overlay">
+    <div class="surprise-container">
+      <img src="images/03.jpg" alt="Surprise Image 3" class="surprise-image">
+      <div class="surprise-text">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">You're beautiful! 🌹</h1>
+        <p class="custom-font text-4xl"><h4>
+          Tumhe kisi ne bolaya nhi but tum bahut sundar ho. Tumhari simplicity, tumhara nature, behaviour yhi
+          sab tumhari sundarta hai. Tumhe khud ko kisi se comparision krne ki jaroorat nhi hai tum khud me
+          alag ho baaki duniya se. Tumhara logo k baare me sochna, logo ki help krna yhi sab tumhari beauty
+          hai. Btw tum sach me sundar ho aur isse jyada kuch bolunga to tum uncomfortable ho jaogi 😭</h4>
+        </p>
+      </div>
+    </div>
+    <audio id="audio-3" src="Music/03.mp3" preload="auto"></audio>
+  </div>
 
-                // Stop any currently playing audio
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0; // Reset the audio
-                }
+  <div id="surprise-4" class="surprise-overlay">
+    <div class="surprise-container">
+      <img src="images/04.jpg" alt="Surprise Image 4" class="surprise-image">
+      <div class="surprise-text">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">Our Meetups 💐</h1>
+        <p class="custom-font text-4xl"><h4>
+          Long distance to thik tha but sabse muskil tha chutti me jb hame milte the to place dicide krna.
+          Aisi koi jagah nhi thi jaha pe hame jaanne wale log aate na ho aur isliye sbase muskil kaam tha
+          jagah dhoondhna but wo bhi har baar kisi na kisi tarah mil jata tha. Wo meetups bs kuch mintues ka
+          hota tha jisme kbhi khul k baat nhi hoti thi aur na kbhi khul k mulakaat hoti thi hammesa drr laga
+          rhta tha khi tumko call na aa jye ghar se, koi jaan pahechan ka mil na jye aur inhi sab chakkaro me
+          bs hiiii hello hota tha aur kuch kha liye bs baat to ho hee nhi paati thi kbhi aur wo diwali ki
+          meeting yaad hai na tumne itna wait karaya tha mujhe ki kya batau mujhe ghar bhi jana tha but kisi
+          tarah mummy se jhooth bol k to ruka tha but jo bhi tha wo bhi ek memory tha.</h4>
+        </p>
+      </div>
+    </div>
+    <audio id="audio-4" src="Music/04.mp3" preload="auto"></audio>
+  </div>
 
-                // Show the corresponding surprise
-                document.getElementById(`surprise-${surpriseId}`).style.display = 'flex';
+  <div id="surprise-5" class="surprise-overlay">
+    <div class="surprise-container">
+      <img src="images/05.jpg" alt="Surprise Image 5" class="surprise-image">
+      <div class="surprise-text">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">The Real Meetups 🤗</h1>
+        <p class="custom-font text-4xl"><h4>
+          Kuch bhi ho ham bahar kitna bhi milte the but real meeting to hamari chatt pe hua krti thi jaha pe
+          timing ka to koi dikkat nhi tha but sabse safest aur sabse dangerous place tha wo. Hamesa drr laga
+          rhta tha tumko ki khi koi aa na jye aur isi chakkar me distance itna maintain krke rakhna padta tha
+          ki baat sunne me dikkat hua krti thi. Lekin sabse aachi memory yhi ki hai, tumne mujhe mara bhi yhi
+          tha aur yaad hai last day iss baar jb ham mile the tumne haath milaya tha aur mai knee pe baith gya
+          tha wo moment bahar khi pe himmat nhi hoti krne ki but wo bhi aacha tha 😂. Aur diwali pe surprise
+          bhi tumko yhi pe kiya tha aakar aur wo expression tumhara dekhne layak tha bs utni hee khush rha kro
+          hamesa.</h4>
+        </p>
+      </div>
+    </div>
+    <audio id="audio-5" src="Music/05.mp3" preload="auto"></audio>
+  </div>
 
-                // Play the associated audio
-                currentAudio = document.getElementById(`audio-${surpriseId}`);
-                currentAudio.play();
+  <div id="surprise-6" class="surprise-overlay">
+    <div class="surprise-container">
+      <img src="images/06.jpg" alt="Surprise Image 6" class="surprise-image">
+      <div class="surprise-text">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">The Mahakumbh Special 🫂💓</h1>
+        <p class="custom-font text-4xl"><h4>
+          Life ki best memory me se ek hai jo abhi hamne create kiya hai Mahakumbh me. Mujhe samajh nhi aa rha
+          hai ki mai wo kitna aur kaise likhu but wo do din mai apni poori lif nhi bhoolne wala. Tum meri life
+          me rhogi ya nhi ye to nhi pta but mai un 2 dino k sahare apni poori life jeene wala hu. Ye first
+          time hua tha ki hame koi fark nhi pad rha tha ki koi dekh rha hai ya nhi bs ham chalte chale jaa rhe
+          the ek dusre k saath aisa lag rha tha jaise baaki ki duniya exist hee nhi krti. Mai hamesa miss
+          krunga un 2 dino ko but aate time mai kya batau mera aane ka bilkul bhi mann nhi tha emotional ho
+          gya tha agar tumhari dost nhi hoti to ro diya hota jaise taise jaldi se nikla wha se aur yha jb aaya
+          to dekha ki abhi aur chutti hai 2 dino ki tb bahut gussa lag rhi thi but rukta to bhi rhne me dikkat
+          hoti. Aur last me bs itna kahna chahunga ki<b> Thank You so much for making my day memorable. Thank
+            You for coming in my life. Thank You for your each and every support. Be Happy and Be Yourself.
+            You're the best</b></h4>
+        </p>
+      </div>
+    </div>
+    <audio id="audio-6" src="Music/06.mp3" preload="auto"></audio>
+  </div>
 
-                // Mark card as opened by disabling the button and changing card appearance
-                card.querySelector('button').disabled = true;
-                card.classList.add('bg-gray-400'); // Mark the card as opened
+  <script>
+    let openedCards = 0; // Track opened cards
+let currentAudio = null; // Track the currently playing audio
 
-                // Hide the button after clicking
-                button.style.display = 'none';
+document.addEventListener('DOMContentLoaded', () => {
+  const surpriseOverlays = document.querySelectorAll('.surprise-overlay');
+  const buttons = document.querySelectorAll('.surprise-btn');
 
-                // Increment opened cards count
-                openedCards++;
+  // --- ADDED CODE START ---
+  // Function to update the lock state for an individual button based on its data-unlock attribute.
+  function updateLockStateForButton(button) {
+    const unlockTimeStr = button.getAttribute('data-unlock');
+    if (!unlockTimeStr) return; // If no unlock time is set, do nothing.
+    const unlockTime = new Date(unlockTimeStr);
+    const now = new Date();
+    if (now < unlockTime) {
+      button.disabled = true;
+      button.textContent = '🔒';
+      button.style.fontSize = '2rem';
+      button.classList.add('opacity-60', 'cursor-not-allowed');
+    } else {
+      button.disabled = false;
+      button.textContent = 'Show Surprise';
+      button.style.fontSize = '';
+      button.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+  }
 
-                // Disable all buttons if all cards are opened
-                if (openedCards === document.querySelectorAll('.card').length) {
-                    document.querySelectorAll('.surprise-btn').forEach(button => {
-                        button.disabled = true;
-                    });
-                }
+  // Function to update the lock state for all buttons.
+  function updateLockStates() {
+    buttons.forEach(button => updateLockStateForButton(button));
+  }
 
-                // Trigger celebration (optional)
-                triggerCelebration();
-            });
-        });
+  // Run the check immediately and then every second.
+  updateLockStates();
+  setInterval(updateLockStates, 1000);
+  // --- ADDED CODE END ---
 
-        // Close surprise overlay by clicking anywhere inside
-        document.querySelectorAll('.surprise-container').forEach(container => {
-            container.addEventListener('click', () => {
-                // Stop the currently playing audio
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0; // Reset the audio
-                }
+  // Show full-screen surprise and toggle audio
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const surpriseId = button.getAttribute('data-surprise');
+      const surpriseElement = document.getElementById(`surprise-${surpriseId}`);
+      const audioElement = document.getElementById(`audio-${surpriseId}`);
 
-                // Hide the surprise
-                container.parentElement.style.display = 'none';
-            });
-        });
+      // Stop any currently playing audio
+      if (currentAudio && currentAudio !== audioElement) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
 
-        // Celebration effect with falling flowers
-        function triggerCelebration() {
-            const celebration = document.getElementById('celebration');
-            celebration.innerHTML = '';
-            for (let i = 0; i < 40; i++) {
-                const flower = document.createElement('div');
-                flower.classList.add('flower');
-                flower.style.left = Math.random() * 100 + 'vw';
-                flower.style.top = Math.random() * -100 + 'vh';
-                flower.style.animationDelay = Math.random() * 1 + 's';
-                flower.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                flower.style.opacity = Math.random() * 0.6 + 0.4;
-                celebration.appendChild(flower);
-            }
-            setTimeout(() => {
-                celebration.innerHTML = '';
-            }, 7000);
-        }
-    </script>
+      // Show the surprise overlay
+      surpriseElement.style.display = 'flex';
 
-    <!-- Celebration Animation -->
-    <div class="celebration" id="celebration"></div>
+      // Update current audio
+      currentAudio = audioElement;
+
+      // Toggle audio playback
+      currentAudio.play();
+
+      // Mark card as opened
+      button.disabled = true;
+      // Now that each card container has the "card" class, closest() works correctly.
+      button.closest('.card').classList.add('bg-gray-400');
+      button.style.display = 'none';
+      openedCards++;
+
+      // Disable all buttons if all cards are opened
+      if (openedCards === buttons.length) {
+        buttons.forEach(btn => (btn.disabled = true));
+      }
+
+      // Trigger celebration effect
+      triggerCelebration();
+    });
+  });
+
+  // Close surprise overlay and stop audio
+  surpriseOverlays.forEach(overlay => {
+    overlay.addEventListener('click', () => {
+      // Hide the overlay
+      overlay.style.display = 'none';
+
+      // Stop the audio
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+    });
+  });
+
+  // Celebration effect with falling flowers
+  function triggerCelebration() {
+    const celebrationContainer = document.createElement('div');
+    celebrationContainer.classList.add('celebration');
+    document.body.appendChild(celebrationContainer);
+
+    for (let i = 0; i < 40; i++) {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.style.left = `${Math.random() * 100}vw`;
+      flower.style.top = `${Math.random() * -100}vh`;
+      flower.style.animationDelay = `0s`;
+      flower.style.animationDuration = `${Math.random() * 1 + 2}s`;
+      celebrationContainer.appendChild(flower);
+    }
+
+    // Clean up the celebration after animation
+    setTimeout(() => {
+      celebrationContainer.remove();
+    }, 4000);
+  }
+});
+  </script>
 </body>
-
 </html>
